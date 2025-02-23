@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Go to Prom With Me? 🌸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(45deg, #ff99cc, #ff6699);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts animation */
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff3366;
+            animation: float 6s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Proposal section */
+        .proposal {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .photo {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Response buttons */
+        .buttons {
+            margin: 3rem 0;
+        }
+
+        button {
+            font-size: 2rem;
+            padding: 1rem 3rem;
+            margin: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Pacifico', cursive;
+        }
+
+        #yesBtn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        #noBtn {
+            background: #ff4444;
+            color: white;
+        }
+
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            button { font-size: 1.5rem; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating hearts -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Main proposal -->
+    <div class="proposal">
+        <h1>[Your Name]'s Big Question 💌</h1>
+        
+        <!-- Add your photos here -->
+        <div class="photo-gallery">
+            <img src="your-photo1.jpg" class="photo" alt="Our Memory">
+            <img src="your-photo2.jpg" class="photo" alt="Our Memory">
+            <img src="your-photo3.jpg" class="photo" alt="Our Memory">
+        </div>
+
+        <h1>Will You Go to Prom With Me, [Crush's Name]? 🥀</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn">YES! 😍</button>
+            <button id="noBtn">Maybe... 😅</button>
+        </div>
+
+        <!-- Hidden message -->
+        <div id="responseMessage" style="display: none;">
+            <h2>YAY! 💃🕺<br>Can't wait to dance the night away with you! 💫<br> 
+                <span id="countdown"></span></h2>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // Handle yes button click
+        document.getElementById('yesBtn').addEventListener('click', () => {
+            document.getElementById('responseMessage').style.display = 'block';
+            document.querySelector('.buttons').style.display = 'none';
+            
+            // Add confetti
+            for(let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+                document.body.appendChild(confetti);
+            }
+        });
+
+        // Playful "No" button movement
+        const noBtn = document.getElementById('noBtn');
+        noBtn.addEventListener('mouseover', () => {
+            noBtn.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+        });
+
+        // Prom countdown timer
+        const promDate = new Date('2024-04-20').getTime(); // Set your prom date
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = promDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('countdown').innerHTML = 
+                `${days} days and ${hours} hours to go! ⏳`;
+        }, 1000);
+    </script>
+</body>
+</html>
