@@ -1,63 +1,59 @@
 // Function to handle button click events
 function selectOption(option) {
-    // Check which option was clicked
     if (option === 'yes') {
-        // Flash rainbow colors
         flashRainbowColors(function() {
-            document.getElementById('question').style.display = 'none'; // Hide the question
-            displayFinalImage(); // Display the final image
+            document.getElementById('question').style.display = 'none'; 
+            displayFinalImage(); 
         });
     } else if (option === 'no') {
-        // Change text on the "No" button to "You sure?"
         document.getElementById('no-button').innerText = 'You sure?'; 
-        // Increase font size of "Yes" button
         var yesButton = document.getElementById('yes-button');
         var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        var newSize = parseFloat(currentFontSize) * 2; // Increase font size by 2x
+        var newSize = parseFloat(currentFontSize) * 2; 
         yesButton.style.fontSize = newSize + 'px';
     } else {
         alert('Invalid option!');
     }
 }
 
-// Function to flash rainbow colors and then execute a callback function
+// Function to flash rainbow colors and execute a callback
 function flashRainbowColors(callback) {
     var colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
     var i = 0;
     var interval = setInterval(function() {
         document.body.style.backgroundColor = colors[i];
         i = (i + 1) % colors.length;
-    }, 200); // Change color every 200 milliseconds
+    }, 200);
     setTimeout(function() {
         clearInterval(interval);
-        document.body.style.backgroundColor = '#FADADD'; // Reset to baby pink
+        document.body.style.backgroundColor = '#FADADD'; 
         if (callback) {
             callback();
         }
-    }, 2000); // Flash colors for 2 seconds
+    }, 2000);
 }
 
 // Function to display the initial image
 function displayInitialImage() {
     var imageContainer = document.getElementById('image-container');
     var img = new Image();
-    img.src = 'images/our-pic.jpg'; // Ensure the file is in the 'images' folder
+    img.src = 'our-pic.jpg';  // ✅ Image is in the root folder
     img.alt = 'Us Together';
     img.style.width = '250px';
     img.style.height = '250px';
-    img.style.borderRadius = '50%'; // Make it circular
+    img.style.borderRadius = '50%'; 
     img.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
     img.onload = function() {
         imageContainer.appendChild(img);
     };
 }
 
-// Function to display the final image after selecting "Yes"
+// Function to display the final image after clicking "Yes"
 function displayFinalImage() {
     document.getElementById('image-container').innerHTML = '';
     var imageContainer = document.getElementById('image-container');
     var img = new Image();
-    img.src = 'images/our-pic.jpg'; // Keep the same image for a cute effect
+    img.src = 'our-pic.jpg';  // ✅ Image is in the root folder
     img.alt = 'Happy Us';
     img.style.width = '300px';
     img.style.height = '300px';
@@ -65,8 +61,8 @@ function displayFinalImage() {
     img.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
     img.onload = function() {
         imageContainer.appendChild(img);
-        document.getElementById('options').style.display = 'none'; // Hide buttons
-        displayFinalMessage(); // Show hearts and countdown
+        document.getElementById('options').style.display = 'none';
+        displayFinalMessage(); 
     };
 }
 
@@ -78,7 +74,7 @@ function displayFinalMessage() {
     startCountdown();
 }
 
-// Function to create a floating hearts animation
+// Function to create floating hearts animation
 function createHeartAnimation() {
     let heartContainer = document.createElement('div');
     heartContainer.id = "heart-container";
@@ -97,7 +93,7 @@ function createHeartAnimation() {
     }, 200);
 }
 
-// Function to start the countdown to February 28, 2025
+// Function to start countdown to Feb 28, 2025
 function startCountdown() {
     const eventDate = new Date("February 28, 2025 00:00:00").getTime();
     const countdownElement = document.createElement('div');
@@ -112,5 +108,5 @@ function startCountdown() {
     }, 1000);
 }
 
-// Display the initial image on page load
+// Load the initial image when the page loads
 displayInitialImage();
