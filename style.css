@@ -1,40 +1,75 @@
 /* style.css */
 
+/* Import cute handwriting font */
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
 body {
-    font-family: Arial, sans-serif; /* Fallback font family */
+    font-family: 'Sacramento', cursive, Arial, sans-serif; /* Use Sacramento font */
     text-align: center; /* Center-align text */
     margin: 0; /* Remove default margin */
-    background-color: #FADADD; /* Set background color to light pink */
+    background-color: #FADADD; /* Soft baby pink background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+/* Main Container */
 #container {
-    display: flex; /* Use flexbox layout */
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center-align items horizontally */
-    justify-content: center; /* Center-align items vertically */
-    height: 100vh; /* Make the container full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-#image-container {
-    /* This container will hold the images */
+/* Image Container */
+#image-container img {
+    max-width: 300px; /* Set max width for the image */
+    border-radius: 20px; /* Rounded corners for a soft effect */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Question Text */
 #question {
-    font-family: 'Sacramento', cursive; /* Apply Sacramento font to the question */
-    font-size: 52px; /* Set font size for the question */
+    font-size: 64px; /* Make the question BIGGER */
+    color: #d63384; /* Cute pink color for the text */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    margin-bottom: 20px;
 }
 
+/* Options Button Container */
 #options {
-    margin-top: 20px; /* Add space above the options */
+    margin-top: 20px;
 }
 
+/* Buttons */
 button {
-    padding: 10px 20px; /* Set padding for buttons */
-    margin: 0 10px; /* Set margin around buttons */
-    font-size: 26px; /* Set font size for buttons */
-    font-family: 'Sacramento', cursive; /* Apply Sacramento font to the options */
-    background-color: #FB607F; /* Set button background color */
-    color: white; /* Set text color to white */
-    border: none; /* Remove button border */
-    cursor: pointer; /* Set cursor to pointer on hover */
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 28px; /* Bigger Buttons */
+    font-family: 'Sacramento', cursive;
+    background-color: #FB607F; /* Pink Button */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Rounded Buttons */
+    cursor: pointer;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Button Hover Effect */
+button:hover {
+    background-color: #ff1e56; /* Darker Pink on Hover */
+    transform: scale(1.1); /* Make it slightly bigger */
+}
+
+/* Special Animation for "Yes" Button Growing */
+@keyframes growButton {
+    from { transform: scale(1); }
+    to { transform: scale(1.4); }
+}
+
+.yes-grow {
+    animation: growButton 0.5s forwards;
 }
